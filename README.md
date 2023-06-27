@@ -22,3 +22,12 @@ In this project, we will perform the following tests:
 3. Request and Response Testing: Ensuring that the requests sent to the API are properly handled and the responses returned are correct, including status codes, headers, and payload data.
 4. Data Validation: Validating the data format, data types, and data integrity in API requests and responses.
 5. Performance Testing: Assessing the performance and scalability of the API by testing its response times, throughput, and resource usage under various loads and stress conditions.
+
+## Final Considerations 
+
+This API is used in the Postman Student Expert Certification that teaches the fundamentals of APIs and Postman and awards a digital badge on completion.
+
+Sign up for instant access to the training today:
+
+https://www.postman.com/student-program/student-expert/
+
