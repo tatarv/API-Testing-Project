@@ -1,5 +1,9 @@
+<p align="center">
+  <img src="https://github.com/tatarv/API-Testing-Project/blob/main/1.%20Documentation/PostmanAcademy.png">
+</p>
+
 ## Project’s Objective
-This project focuses on testing the Postman Library API v2, A REST API that allows you to CRUD (Create, Read, Update, Delete) books in a public library database. We will use Postman to interact with this API and manage books. The goal is to ensure the functionality, reliability, and performance of the API, ensuring that it works as intended. It involves sending requests to various endpoints, validating responses, and verifying the behavior of the APIs under different scenarios.
+This project focuses on testing the Postman Library API v2, A REST API that allows you to CRUD (Create, Read, Update, Delete) books in a public library database, used in the Postman Student Expert Certification that teaches the fundamentals of APIs and about Postman tool. The goal is to ensure the functionality, reliability, and performance of the API, ensuring that it works as intended. It involves sending requests to various endpoints, validating responses, and verifying the behavior of the APIs under different scenarios.
 
 API Link -> https://library-api.postmanlabs.com/books.
 ## What is an API?
@@ -22,12 +26,4 @@ In this project, we will perform the following tests:
 3. Request and Response Testing: Ensuring that the requests sent to the API are properly handled and the responses returned are correct, including status codes, headers, and payload data.
 4. Data Validation: Validating the data format, data types, and data integrity in API requests and responses.
 5. Performance Testing: Assessing the performance and scalability of the API by testing its response times, throughput, and resource usage under various loads and stress conditions.
-
-## Final Considerations 
-
-This API is used in the Postman Student Expert Certification that teaches the fundamentals of APIs and Postman and awards a digital badge on completion.
-
-Sign up for instant access to the training today:
-
-https://www.postman.com/student-program/student-expert/
 
