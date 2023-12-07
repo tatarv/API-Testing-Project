@@ -2,28 +2,43 @@
   <img src="https://github.com/tatarv/API-Testing-Project/blob/main/1.%20Documentation/PostmanAcademy.png">
 </p>
 
-## Project’s Objective
-This project focuses on testing the Postman Library API v2, A REST API that allows you to CRUD (Create, Read, Update, Delete) books in a public library database, used in the Postman Student Expert Certification that teaches the fundamentals of APIs and about Postman tool. The goal is to ensure the functionality, reliability, and performance of the API, ensuring that it works as intended. It involves sending requests to various endpoints, validating responses, and verifying the behavior of the APIs under different scenarios.
+## Objetivo do Projeto
+Este projeto se concentra em testar a API Postman Library v2, uma API REST que permite CRUD (criar, ler, atualizar, excluir) livros em um banco de dados de biblioteca pública, 
+usada na certificação Postman Student Expert que ensina os fundamentos das APIs e sobre Ferramenta Postman. 
+O objetivo é garantir a funcionalidade, confiabilidade e desempenho da API, garantindo que ela funcione conforme planejado.
 
-API Link -> https://library-api.postmanlabs.com/books.
-## What is an API?
-An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate with each other. It defines the methods, data formats, and authentication mechanisms that applications use to interact with the API provider.
+Link da API -> https://library-api.postmanlabs.com/books.
 
-## What is an REST API?
+## O que é uma API?
 
-A REST API (Representational State Transfer Application Programming Interface) is an architectural style for designing networked applications. It is commonly used in web development to create APIs that allow communication and data exchange between different systems.
+Uma API (Application Programming Interface) é um conjunto de regras e protocolos que permite que diferentes aplicativos de software se comuniquem entre si.
+Ele define os métodos, formatos de dados e mecanismos de autenticação que os aplicativos usam para interagir com o provedor de API.
 
-A REST API operates based on a set of predefined rules and principles, making use of HTTP methods such as GET, POST, PUT, and DELETE to perform various operations on resources. It follows a client-server model, where the client sends requests to the server, and the server responds with the requested data or performs the requested action.
+## O que é uma API REST?
 
-## API Testing: Concepts and Test planning
+API REST, que significa "Interface de Programação de Aplicações no Estilo Representacional de Transferência de Estado" (Representational State Transfer),
+é um estilo arquitetural para o design de sistemas distribuídos na web.
+Uma API REST opera com base em um conjunto de regras e princípios predefinidos, fazendo uso de métodos HTTP como GET, POST, PUT e DELETE para realizar diversas operações nos recursos. 
+Segue um modelo cliente-servidor, onde o cliente envia solicitações ao servidor, e o servidor responde com os dados solicitados ou executa a ação solicitada.
 
-API testing refers to the practice of testing Application Programming Interfaces (APIs) to ensure their functionality, reliability, performance, and security.
+## O que são testes de API?
 
-In this project, we will perform the following tests:
+Testes de API referem-se ao processo de verificar se uma API (Interface de Programação de Aplicações) funciona conforme o esperado.
 
-1. Smoke Testing: Type of software testing that focuses on quickly identifying major defects or issues in a software build or release. It is performed to ensure that the critical functionalities of the software are working as expected and to determine if further testing is necessary before proceeding with more comprehensive testing.
-2. Functional Testing: Verifying that the API functions as expected by testing different scenarios and input combinations.
-3. Request and Response Testing: Ensuring that the requests sent to the API are properly handled and the responses returned are correct, including status codes, headers, and payload data.
-4. Data Validation: Validating the data format, data types, and data integrity in API requests and responses.
-5. Performance Testing: Assessing the performance and scalability of the API by testing its response times, throughput, and resource usage under various loads and stress conditions.
+## Qual a importância dos testes de API?
 
+Os testes de API desempenham um papel fundamental no desenvolvimento de software, fornecendo uma série de benefícios essenciais:
+
+Garantia de Funcionalidade:
+
+Testes de API asseguram que os endpoints e funcionalidades da API estão corretos e alinhados com os requisitos funcionais do sistema.
+
+Integração Eficaz: Permitem a verificação da integração suave entre diferentes componentes de software, garantindo que trabalhem em conjunto de maneira eficiente.
+
+Robustez e Confiabilidade: Identificam e corrigem problemas de robustez, garantindo que a API lide efetivamente com diversos cenários e entradas, contribuindo para a confiabilidade geral do sistema.
+
+Detecção Antecipada de Problemas:A automação dos testes de API facilita a detecção precoce de regressões ou quebras de compatibilidade, evitando problemas em estágios avançados do desenvolvimento.
+
+Performance e Escalabilidade: Testes de carga avaliam o desempenho da API sob diferentes condições, proporcionando insights sobre sua escalabilidade e capacidade de lidar com volumes significativos de tráfego.
+
+Segurança Aprimorada: Identificam e corrigem vulnerabilidades de segurança, garantindo que a API seja resistente a ameaças como injeção de SQL, Cross-Site Scripting (XSS) e outros ataques.
