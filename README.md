@@ -39,5 +39,4 @@ Detecção Antecipada de Problemas: A automação dos testes de API facilita a d
 
 Performance e Escalabilidade: Testes de carga avaliam o desempenho da API sob diferentes condições, proporcionando insights sobre sua escalabilidade e capacidade de lidar com volumes significativos de tráfego.
 
-Segurança Aprimorada: Identificam e corrigem vulnerabilidades de segurança, garantindo que a API seja resistente a ameaças como injeção de SQL, Cross-Site Scripting (XSS) e outros ataques.x'
-     
+Segurança Aprimorada: Identificam e corrigem vulnerabilidades de segurança, garantindo que a API seja resistente a ameaças como injeção de SQL, Cross-Site Scripting (XSS) e outros ataques.
