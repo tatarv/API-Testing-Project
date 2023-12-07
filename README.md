@@ -29,16 +29,15 @@ Testes de API referem-se ao processo de verificar se uma API (Interface de Progr
 
 Os testes de API desempenham um papel fundamental no desenvolvimento de software, fornecendo uma série de benefícios essenciais:
 
-Garantia de Funcionalidade:
-
-Testes de API asseguram que os endpoints e funcionalidades da API estão corretos e alinhados com os requisitos funcionais do sistema.
+Garantia de Funcionalidade: Testes de API asseguram que os endpoints e funcionalidades da API estão corretos e alinhados com os requisitos funcionais do sistema.
 
 Integração Eficaz: Permitem a verificação da integração suave entre diferentes componentes de software, garantindo que trabalhem em conjunto de maneira eficiente.
 
 Robustez e Confiabilidade: Identificam e corrigem problemas de robustez, garantindo que a API lide efetivamente com diversos cenários e entradas, contribuindo para a confiabilidade geral do sistema.
 
-Detecção Antecipada de Problemas:A automação dos testes de API facilita a detecção precoce de regressões ou quebras de compatibilidade, evitando problemas em estágios avançados do desenvolvimento.
+Detecção Antecipada de Problemas: A automação dos testes de API facilita a detecção precoce de regressões ou quebras de compatibilidade, evitando problemas em estágios avançados do desenvolvimento.
 
 Performance e Escalabilidade: Testes de carga avaliam o desempenho da API sob diferentes condições, proporcionando insights sobre sua escalabilidade e capacidade de lidar com volumes significativos de tráfego.
 
-Segurança Aprimorada: Identificam e corrigem vulnerabilidades de segurança, garantindo que a API seja resistente a ameaças como injeção de SQL, Cross-Site Scripting (XSS) e outros ataques.
+Segurança Aprimorada: Identificam e corrigem vulnerabilidades de segurança, garantindo que a API seja resistente a ameaças como injeção de SQL, Cross-Site Scripting (XSS) e outros ataques.x'
+     
