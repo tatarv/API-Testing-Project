@@ -13,6 +13,6 @@ Documentação da API → https://documenter.getpostman.com/view/15567703/UVyxRt
 ## Documentos
 
 1. Plano de testes
-2. Casos de testes
+2. Mind map com cenários e casos de testes
 3. Relatório de bugs e melhorias
 4. Relatório de testes
