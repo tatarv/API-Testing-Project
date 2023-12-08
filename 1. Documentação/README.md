@@ -7,7 +7,7 @@ Documentação da API → https://documenter.getpostman.com/view/15567703/UVyxRt
 ## Atividades de Testes
 
 <p align="center">
-  <img src="https://github.com/tatarv/API-Testing-Project/blob/main/1.%20Documentation/Test%20Activities.png">
+  <img src="https://github.com/tatarv/API-Testing-Project/blob/main/1.%20Documentação/Etapas%20do%20processo%20de%20testes.png">
 </p>
 
 ## Documentos
