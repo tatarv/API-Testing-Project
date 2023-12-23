@@ -1,0 +1,2021 @@
+{
+	"info": {
+		"_postman_id": "5133c95f-af24-4f43-a4ee-f79b7967c111",
+		"name": "Postman Library API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29687559"
+	},
+	"item": [
+		{
+			"name": "Autorização",
+			"item": [
+				{
+					"name": "Acesso com chave",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"pm.test(\"Verificar código de retorno da requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(201));\r",
+									"});\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"The Four Agreements\",\r\n  \"author\": \"don Miguel Ruiz\",\r\n  \"genre\": \"self-help\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Acesso sem chave",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"var errorMessageCredentials = \"Invalid or missing credentials. Make sure you add 'api-key' to the request headers with a valid value\"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key não está configurada\", function () {\r",
+									"    pm.expect(pm.request.headers.has(\"api-key\", \"postmanrulz\")).to.be.false;\r",
+									"});\r",
+									"pm.test(\"Verificar código de retorno da requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(401));\r",
+									"});\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(errorMessageCredentials);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"The Four Agreements\",\r\n  \"author\": \"don Miguel Ruiz\",\r\n  \"genre\": \"self-help\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cadastro de livros",
+			"item": [
+				{
+					"name": "Cadastrar Livros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(201));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Teste Taís\",\r\n  \"author\": \"don Miguel Ruiz\",\r\n  \"genre\": \"self-help\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de campos obrigatórios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var errorMessage = \"must NOT have fewer than 1 characters\";\r",
+									"var errorMessage1 =  \"Unexpected token } in JSON at position\"\r",
+									"var getErrorMessage = pm.response.json().message;\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(400));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getErrorMessage).to.include.oneOf([errorMessage, errorMessage1]);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"\",\r\n  \"author\": \"\",\r\n  \"genre\": \"\",\r\n  \"yearPublished\": \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de campos obrigatórios com espaços em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var errorMessage = \"Cannot read property '0' of null\";\r",
+									"var errorMessage1 =  \"Unexpected token\"\r",
+									"var getErrorMessage = pm.response.json().message;\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno\", function () {\r",
+									"   pm.expect(requestStatus.status.includes(\"500\",\"400\"))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar tipo de Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getErrorMessage).to.include.oneOf([errorMessage, errorMessage1]);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"        \",\r\n  \"author\": \"     \",\r\n  \"genre\": \"     \",\r\n  \"yearPublished\": \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de tamanho mínimo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var errorMessage = \"must NOT have fewer than 1 characters\";\r",
+									"var errorMessage1 =  \"Unexpected token } in JSON at position\"\r",
+									"var getErrorMessage = pm.response.json().message;\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test('Verificar se api-key está configurada', function () {\r",
+									"    pm.expect(pm.request.to.have.header('api-key', 'postmanrulz'));\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar código de retorno da Requisição', function () {\r",
+									"    pm.expect(requestStatus.to.have.status(201));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro não é exibida\", function () {\r",
+									"    pm.expect(getErrorMessage).to.not.be.oneOf([errorMessage,errorMessage1]);\r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se informações dos livros são retornadas no body', function () {\r",
+									"    pm.expect(pm.response.text()).to.include('id');\r",
+									"    pm.expect(pm.response.text()).to.include('title');\r",
+									"    pm.expect(pm.response.text()).to.include('author');\r",
+									"    pm.expect(pm.response.text()).to.include('genre');\r",
+									"    pm.expect(pm.response.text()).to.include('yearPublished');\r",
+									"    pm.expect(pm.response.text()).to.include('isPermanentCollection');\r",
+									"    pm.expect(pm.response.text()).to.include('createdAt');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"u\",\r\n  \"author\": \"u\",\r\n  \"genre\": \"u\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de tamanho máximo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var errorMessage = \"value too long for type character varying(255)\";\r",
+									"var errorMessage1 =  \"is out of range for type integer\"\r",
+									"var getErrorMessage = pm.response.json().message;\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(500));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getErrorMessage).to.include.oneOf([errorMessage,errorMessage1]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Vivamus malesuada augue eu leo tincidunt, eget scelerisque sapien ullamcorper. Aliquam auctor fringilla elit, vitae facilisis neque tempus nec. Quisque commodo odio sit amet nibh fermentum, vitae consectetur quam pharetra. Suspendisse non purus a justo suscipit semper. Integer venenatis, justo a vulputate commodo, nisi velit vulputate nisi, sit amet venenatis metus nulla a libero. Proin ut consectetur quam. Vestibulum vehicula eu leo vel accumsan. Nam nec arcu a tortor varius convallis. Praesent accumsan elit sed leo blandit, ut varius justo lacinia. Nunc in nisl a justo scelerisque vehicula. Nulla facilisi. Phasellus imperdiet nulla vel erat varius, id aliquet nisi iaculis. Sed eleifend vehicula orci, ut bibendum metus tincidunt vel.\",\r\n  \"author\": \"In a quaint village nestled between rolling hills and babbling brooks, there lived a community of eccentric individuals. Each day brought a new adventure, from the mystical forest on the outskirts to the bustling market square where vendors peddled exotic wares. The town square, adorned with colorful banners and lively chatter, became the heartbeat of this enchanting place.\",\r\n  \"genre\": \"In a quaint village nestled between rolling hills and babbling brooks, there lived a community of eccentric individuals. Each day brought a new adventure, from the mystical forest on the outskirts to the bustling market square where vendors peddled exotic wares. The town square, adorned with colorful banners and lively chatter, became the heartbeat of this enchanting place.\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de caracteres especiais",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(201));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"POST\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"!@#$%¨&*()(_-++\",\r\n  \"author\": \"!@#$%¨&*()(_-++\",\r\n  \"genre\": \"!@#$%¨&*()(_-++\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}",
+							"host": [
+								"{{APIURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Listagem de todos os livros",
+			"item": [
+				{
+					"name": "Listar Todos os livros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Listagem de livros utilizando parâmetros",
+			"item": [
+				{
+					"name": "Listar livros por id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getErrorMessage = pm.response.json().message;\r",
+									"var getBookId = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getErrorMessage == errorMessage){\r",
+									"     postman.setNextRequest(null); \r",
+									"     console.log(\"Livro não encontrado, informe um livro que está cadastrado no banco de dados para prosseguir com os próximos testes\");\r",
+									"\r",
+									"}else{\r",
+									"\r",
+									"   pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(200));\r",
+									"   });\r",
+									"\r",
+									"   pm.test(\"Verificar se livro retornado corresponde ao id pesquisado\", function () {\r",
+									"   pm.expect(getBookId).to.include(bookIdParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2309e2f5-6bfa-4463-8d6a-3220b6c831ea"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por título",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var getURLParam = pm.request.url.query.toString();\r",
+									"var queryParam = pm.request.url.query.get('search');\r",
+									"var responseBody = pm.response.json();\r",
+									"var bookTitleBody = responseBody[0].title;\r",
+									"var getMessageBookNotFound = pm.response.json();\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(queryParam).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id pesquisado\", function () {\r",
+									"pm.expect(bookTitleBody).to.include(queryParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?search=Kill",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Kill"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por autor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var queryParam = pm.request.url.query.toString();\r",
+									"var valueQueryParam = pm.request.url.query.get('search');\r",
+									"var responseBody = pm.response.json();\r",
+									"var bodyAuthorValue = responseBody[0].author;\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									" \r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(valueQueryParam).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id pesquisado\", function () {\r",
+									"     pm.expect(bodyAuthorValue).to.include(valueQueryParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?search=Harper",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Harper"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por genêro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var queryParam = pm.request.url.query.toString();\r",
+									"var valueQueryParam = pm.request.url.query.get('genre');\r",
+									"var responseBody = pm.response.json();\r",
+									"var bodyGenreValue = responseBody[0].genre;\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(valueQueryParam).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id pesquisado\", function () {\r",
+									"     pm.expect(bodyGenreValue).to.include(valueQueryParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?genre=fiction",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "fiction"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por atributo checkedOut",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var queryParam = pm.request.url.query.toString();\r",
+									"var valueQueryParam = pm.request.url.query.get('checkedOut');\r",
+									"var responseBody = pm.response.json();\r",
+									"var bodycheckedOutValue = responseBody[0].checkedOut.toString();\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									" \r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(valueQueryParam).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id pesquisado\", function () {\r",
+									"     pm.expect(bodycheckedOutValue).to.include(valueQueryParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?checkedOut=false",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "checkedOut",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por combinação de parametros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?checkedOut=true&search=story&genre=fiction",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "checkedOut",
+									"value": "true"
+								},
+								{
+									"key": "search",
+									"value": "story"
+								},
+								{
+									"key": "genre",
+									"value": "fiction"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros com id inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getErrorMessage = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(404));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"GET\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getErrorMessage).to.include(errorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c1692df6-143e-480c-9ae0-2b6358341bf4",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros com título inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?search=help",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "help"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros com autor inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?search=Taís",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "Taís"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros com gênero inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?genre=Comédia",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "Comédia"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por atributo checkedOut inválido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?checkedOut=trues",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "checkedOut",
+									"value": "trues"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar livros por combinação de parametros com valores inválidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APIURL}}/?checkedOut=true&search=story&genre=self-help",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "checkedOut",
+									"value": "true"
+								},
+								{
+									"key": "search",
+									"value": "story"
+								},
+								{
+									"key": "genre",
+									"value": "self-help"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alteração de livros",
+			"item": [
+				{
+					"name": "Alterar um livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\"\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"    \r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id pesquisado\", function () {\r",
+									"     pm.expect(pm.response.json().id).to.include(bookIdParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Teste 1\",\r\n  \"author\": \"don Miguel Ruiz\",\r\n  \"genre\": \"self-help\",\r\n  \"yearPublished\": 1998,\r\n   \"checkedOut\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c648f01f-1e14-4f8d-8514-09b1ea18d656"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de campos obrigatórios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\";\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var errorMessageRequiredFields = \"must NOT have fewer than 1 characters\";\r",
+									"var errorMessageRequiredFields1 = \"Unexpected token\";\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id não está vazio\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno\", function () {\r",
+									"pm.expect(pm.response.to.have.status(400));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de campos obrigatórios é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include.oneOf([errorMessageRequiredFields,errorMessageRequiredFields1]);\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"d\",\r\n  \"author\": \"d\",\r\n  \"genre\": \"d\",\r\n  \"yearPublished\": 14,\r\n   \"checkedOut\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "820271be-0013-4698-8639-5bf41f104ca7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de campos obrigatórios com espaços em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\";\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var errorMessageNullFields = \"Cannot read property '0' of null\";\r",
+									"var errorMessageRequiredFields = \"Unexpected token\";\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"    pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"\r",
+									"    pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"    pm.expect(pm.response.status.includes(\"500\", \"400\"))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id enviado\", function () {\r",
+									"    pm.expect(pm.response.json().id).to.include(bookIdParam);\r",
+									"   \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include.oneOf([errorMessageNullFields, errorMessageRequiredFields]);\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"           \",\r\n  \"author\": \"       \",\r\n  \"genre\": \"           \",\r\n  \"yearPublished\": 1995,\r\n   \"checkedOut\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "820271be-0013-4698-8639-5bf41f104ca1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de tamanho mínimo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\";\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var errorMessageRequiredFields = \"must NOT have fewer than 1 characters\";\r",
+									"var errorMessageRequiredFields1 = \"Unexpected token\";\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test('Verificar se api-key está configurada', function () {\r",
+									"    pm.expect(pm.request.to.have.header('api-key', 'postmanrulz'));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"    \r",
+									"pm.test('Verificar código de retorno da Requisição', function () {\r",
+									"pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro não é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.not.be.oneOf([errorMessageRequiredFields, errorMessageRequiredFields1]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id enviado\", function () {\r",
+									"    pm.expect(pm.response.json().id).to.include(bookIdParam);\r",
+									"   \r",
+									"});\r",
+									"\r",
+									"pm.test('Verificar se informações dos livros são retornadas no body', function () {\r",
+									"    pm.expect(pm.response.text()).to.include('id');\r",
+									"    pm.expect(pm.response.text()).to.include('title');\r",
+									"    pm.expect(pm.response.text()).to.include('author');\r",
+									"    pm.expect(pm.response.text()).to.include('genre');\r",
+									"    pm.expect(pm.response.text()).to.include('yearPublished');\r",
+									"    pm.expect(pm.response.text()).to.include('isPermanentCollection');\r",
+									"    pm.expect(pm.response.text()).to.include('createdAt');\r",
+									"});\r",
+									"\r",
+									"}\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"u\",\r\n  \"author\": \"u\",\r\n  \"genre\": \"u\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c648f01f-1e14-4f8d-8514-09b1ea18d654"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de tamanho máximo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\";\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var errorMessageSize = \"value too long for type character varying(255)\";\r",
+									"var errorMessageSize1 = \"is out of range for type integer\";\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(pm.request.method).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"pm.expect(pm.response.to.have.status(500));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include.oneOf([errorMessageSize, errorMessageSize1]);\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Vivamus malesuada augue eu leo tincidunt, eget scelerisque sapien ullamcorper. Aliquam auctor fringilla elit, vitae facilisis neque tempus nec. Quisque commodo odio sit amet nibh fermentum, vitae consectetur quam pharetra. Suspendisse non purus a justo suscipit semper. Integer venenatis, justo a vulputate commodo, nisi velit vulputate nisi, sit amet venenatis metus nulla a libero. Proin ut consectetur quam. Vestibulum vehicula eu leo vel accumsan. Nam nec arcu a tortor varius convallis. Praesent accumsan elit sed leo blandit, ut varius justo lacinia. Nunc in nisl a justo scelerisque vehicula. Nulla facilisi. Phasellus imperdiet nulla vel erat varius, id aliquet nisi iaculis. Sed eleifend vehicula orci, ut bibendum metus tincidunt vel.\",\r\n  \"author\": \"In a quaint village nestled between rolling hills and babbling brooks, there lived a community of eccentric individuals. Each day brought a new adventure, from the mystical forest on the outskirts to the bustling market square where vendors peddled exotic wares. The town square, adorned with colorful banners and lively chatter, became the heartbeat of this enchanting place.\",\r\n  \"genre\": \"In a quaint village nestled between rolling hills and babbling brooks, there lived a community of eccentric individuals. Each day brought a new adventure, from the mystical forest on the outskirts to the bustling market square where vendors peddled exotic wares. The town square, adorned with colorful banners and lively chatter, became the heartbeat of this enchanting place.\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c648f01f-1e14-4f8d-8514-09b1ea18d654"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validação de caracteres especiais",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\";\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"    \r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(200));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se livro retornado corresponde ao id enviado\", function () {\r",
+									"     pm.expect(pm.response.json().id).to.include(bookIdParam);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se informações dos livros são retornadas no body\", function () {\r",
+									"     pm.expect(pm.response.text()).to.include(\"id\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"title\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"author\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"genre\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"yearPublished\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"isPermanentCollection\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"!@#$%¨&*()(_-++\",\r\n  \"author\": \"!@#$%¨&*()(_-++\",\r\n  \"genre\": \"!@#$%¨&*()(_-++\",\r\n  \"yearPublished\": 1997\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c648f01f-1e14-4f8d-8514-09b1ea18d654"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar um livro permanente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"   pm.expect(pm.response.to.have.status(403));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de cerro é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include(errorMessagePC);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Teste 1\",\r\n  \"author\": \"don Miguel Ruiz\",\r\n  \"genre\": \"self-help\",\r\n  \"yearPublished\": 1998,\r\n   \"checkedOut\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "53a37668-c99f-46f9-af00-c582924f422b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar um livro com id que não existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\"\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(404));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"PATCH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include(errorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Teste 1\",\r\n  \"author\": \"don Miguel Ruiz\",\r\n  \"genre\": \"self-help\",\r\n  \"yearPublished\": 1998,\r\n   \"checkedOut\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "0be25c14-228d-488f-8a29-f85b25d65c65"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exclusão de um livro",
+			"item": [
+				{
+					"name": "Deletar livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\"\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"DELETE\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"if(getMessageBookNotFound == errorMessage || errorMessagePC){\r",
+									"    postman.setNextRequest(null);\r",
+									"}else{\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(204));\r",
+									"});\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkedOut\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "f586e948-764c-4a29-9848-e11b02e897cb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar um livro permanente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessagePC = \"You cannot modify books in the permanent collection! Book with id '\"+bookIdParam+\"' is in the permanent collection.\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"DELETE\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(403));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include(errorMessagePC);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkedOut\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "53a37668-c99f-46f9-af00-c582924f422b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar um livro com id que não existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var bookIdParam = pm.request.url.path[1];\r",
+									"var getMessageBookNotFound = pm.response.json().message;\r",
+									"var errorMessage = \"Book with id '\"+bookIdParam+\"' not found\"\r",
+									"var requestStatus = pm.response;\r",
+									"var requestMethod = pm.request.method;\r",
+									"\r",
+									"pm.test(\"Verificar se api-key está configurada\", function () {\r",
+									"     pm.expect(pm.request.to.have.header(\"api-key\", \"postmanrulz\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar metódo HTTP da Requisição\", function () {\r",
+									"    pm.expect(requestMethod).to.equal(\"DELETE\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar código de retorno da Requisição\", function () {\r",
+									"   pm.expect(requestStatus.to.have.status(404));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se parâmetro id está sendo preenchido corretamente\", function () {\r",
+									"    pm.expect(bookIdParam).to.not.include(\":id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verificar se mensagem de erro é exibida\", function () {\r",
+									"    pm.expect(getMessageBookNotFound).to.include(errorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkedOut\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{APIURL}}/:id",
+							"host": [
+								"{{APIURL}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c648f01f-1e14-4f8d-8514-09b1ea18d657"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{APIKEY}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "api-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APIURL",
+			"value": "https://library-api.postmanlabs.com/books",
+			"type": "string"
+		},
+		{
+			"key": "APIKEY",
+			"value": "postmanrulz",
+			"type": "string"
+		}
+	]
+}
