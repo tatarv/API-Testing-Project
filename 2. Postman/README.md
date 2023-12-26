@@ -19,11 +19,11 @@ site oficial para donwload da ferramenta: https://www.postman.com/
 3. Dentro do workspace, vá para a area de coleções, clice no menu de contexto e escolha a opção fork
 ![Fork](https://github.com/tatarv/API-Testing-Project/blob/main/2.%20Postman/screenshots/Postman_fork.png)
 
-4. Ou, se preferir crie uma coleção do 0 e crie uma variável que contenha o link da API: https://library-api.postmanlabs.com/books 
-[Variables](https://github.com/tatarv/API-Testing-Project/blob/main/2.%20Postman/screenshots/Postman_variables.png)
+4. Ou, se preferir crie uma coleção do 0 e crie uma variável que contenha o link da API:
+![Variables](https://github.com/tatarv/API-Testing-Project/blob/main/2.%20Postman/screenshots/Postman_variables.png)
 
 5. Preencha as URL's das requisições
-[Collections](https://github.com/tatarv/API-Testing-Project/blob/main/2.%20Postman/screenshots/Postman_colection.png)
+![Collections](https://github.com/tatarv/API-Testing-Project/blob/main/2.%20Postman/screenshots/Postman_colection.png)
 
 
 5. Pronto, pode começar a executar
