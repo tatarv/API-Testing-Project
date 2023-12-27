@@ -1,5 +1,5 @@
 ## Objetivo do Projeto
-Este projeto se concentra em testar a API Postman Library v2, uma API REST que permite CRUD (criar, ler, atualizar, excluir) livros em um banco de dados de biblioteca pública, 
+Este projeto se concentra em testar a API Postman Library v2, uma API REST que permite executar operações CRUD (criar, ler, atualizar, excluir) livros em um banco de dados de biblioteca pública, 
 usada na certificação Postman Student Expert que ensina os fundamentos das APIs e sobre Ferramenta Postman. 
 
 Link da API -> https://library-api.postmanlabs.com/books.
