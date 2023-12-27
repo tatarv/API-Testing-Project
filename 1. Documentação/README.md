@@ -14,6 +14,11 @@ Documentação da API → https://documenter.getpostman.com/view/15567703/UVyxRt
 
 1. Plano de testes
 2. Mind map com cenários e casos de testes
-3. Casos de teste com passo a passo utilizando Gherkin [extraído do jira https://postman-library-v2.atlassian.net/jira/software/projects/PLA/boards/1]
+3. Casos de teste com passo a passo utilizando Gherkin
 4. Relatório de bugs e melhorias
 5. Relatório de testes
+
+## Observações
+
+Os documentos com os casos de teste, relatórios de bugs e melhorias e o relatório de testes forma extraídos do Jira, díponivel em 
+https://postman-library-v2.atlassian.net/jira/software/projects/PLA/boards/1

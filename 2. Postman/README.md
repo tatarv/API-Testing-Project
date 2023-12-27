@@ -27,3 +27,6 @@ site oficial para donwload da ferramenta: https://www.postman.com/
 
 
 5. Pronto, pode começar a executar
+
+Observação: Segundo a documentação, os livros cadastrados são apagados após 3 dias, então se certifique que o livro que está sendo
+pesquisado, alterado, excluído ainda existe na base de dados para que todas as requisições e testes automatizados funcionem corretamente
