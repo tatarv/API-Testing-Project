@@ -20,5 +20,5 @@ Documentação da API → https://documenter.getpostman.com/view/15567703/UVyxRt
 
 ## Observações
 
-Os documentos com os casos de teste, relatórios de bugs e melhorias e o relatório de testes forma extraídos do Jira, díponivel em 
+Os documentos com os casos de teste, relatórios de bugs e melhorias e o relatório de testes foram extraídos do Jira, díponivel em 
 https://postman-library-v2.atlassian.net/jira/software/projects/PLA/boards/1
